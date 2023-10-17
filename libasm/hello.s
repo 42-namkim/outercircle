@@ -2,7 +2,7 @@
 
         section         .text
 _main:
-        xor     rax, 0x02000003 ; sys_read
+        mov     rax, 0x02000003 ; sys_read
         xor     rdi, rdi ; fd == stdin
         mov     rsi, buf ; buf as buf addr
         mov     rdx, 80  ; set buf size
