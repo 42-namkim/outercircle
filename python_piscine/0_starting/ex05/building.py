@@ -3,8 +3,8 @@ import string
 
 
 def count(object: str) -> dict:
-    print(type(object))
     """this function is to count each character in the argument string"""
+    print(object)
     res = {
         "chars": 0,
         "uppers": 0,
@@ -13,29 +13,29 @@ def count(object: str) -> dict:
         "spaces": 0,
         "digits": 0
     }
-    for s in str:
+    for s in object:
         if s.isupper():
-            res["uppers"] + 1
+            res["uppers"] += 1
         elif s.islower():
-            res["lowers"] + 1
+            res["lowers"] += 1
         elif s in string.punctuation:
-            res["p_marks"] + 1
+            res["p_marks"] += 1
         elif s in string.whitespace:
-            res["spaces"] + 1
+            res["spaces"] += 1
         elif s in string.digits:
-            res["digits"] + 1
-    res["chars"] = sum(value for _, value in res())
+            res["digits"] += 1
+    res["chars"] = sum(res.values())
     return res
 
 
 def print_count(res: dict):
     """this function is to print the result of the function above"""
     print(
-            f'The text contains {res["chars"]} characters:'
-            f'{res["uppers"]} upper letters'
-            f'{res["lowers"]} lower letters'
-            f'{res["p_marks"]} punctuation marks'
-            f'{res["spaces"]} spaces'
+            f'The text contains {res["chars"]} characters: \n'
+            f'{res["uppers"]} upper letters \n'
+            f'{res["lowers"]} lower letters \n'
+            f'{res["p_marks"]} punctuation marks \n'
+            f'{res["spaces"]} spaces \n'
             f'{res["digits"]} digits'
         )
 
@@ -43,7 +43,13 @@ def print_count(res: dict):
 def main():
     try:
         args = sys.argv[1:]
-        assert len(args) > 0, "should provide 1 argument"
+        if len(args) == 0:
+            ft_input = ''
+            try:
+                while True:
+                    ft_input += input()
+            except EOFError:
+                args.append(ft_input)
         assert len(args) < 2, "more than 1 argument is provided"
         print_count(count(str(args[0])))
 
