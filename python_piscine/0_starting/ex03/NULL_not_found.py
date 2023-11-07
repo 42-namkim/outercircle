@@ -10,14 +10,11 @@ def NULL_not_found(object: any) -> int:
     values = (0, '', False, None)
     if o_type in types and object in values \
             or o_type == float and object != object:
-        print(types[o_type] + ": ", end = '')
-        print(object, end = ' ')
-        print(o_type)
+        print(f'{types[o_type]}: {object} {o_type}' if object != '' \
+            else f'{types[o_type]}: {o_type}')
         return 0
     elif object is None:
-        print("Nothing: ", end = '')
-        print(object, end = ' ')
-        print(o_type)
+        print(f'Nothing: {object} {o_type}')
         return 0
     else:
         print("Type not Found")
