@@ -4,9 +4,8 @@ import string
 
 def count(object: str) -> dict:
     """this function is to count each character in the argument string"""
-    print(object)
     res = {
-        "chars": 0,
+        "chars": len(object),
         "uppers": 0,
         "lowers": 0,
         "p_marks": 0,
@@ -18,13 +17,12 @@ def count(object: str) -> dict:
             res["uppers"] += 1
         elif s.islower():
             res["lowers"] += 1
+        elif s.isspace():
+            res["spaces"] += 1
+        elif s.isdigit():
+            res["digits"] += 1
         elif s in string.punctuation:
             res["p_marks"] += 1
-        elif s in string.whitespace:
-            res["spaces"] += 1
-        elif s in string.digits:
-            res["digits"] += 1
-    res["chars"] = sum(res.values())
     return res
 
 
@@ -40,19 +38,20 @@ def print_count(res: dict):
         )
 
 
+def get_args():
+    args = sys.argv[1:]
+    if len(args) == 0:  # or args[0] == None:
+        print("What is the text to count?")
+        args.append(sys.stdin.readline())
+    assert len(args) < 2, "more than 1 argument is provided"
+    return (args)
+
+
 def main():
     try:
-        args = sys.argv[1:]
-        if len(args) == 0:
-            ft_input = ''
-            try:
-                while True:
-                    ft_input += input()
-            except EOFError:
-                args.append(ft_input)
-        assert len(args) < 2, "more than 1 argument is provided"
-        print_count(count(str(args[0])))
-
+        args = get_args()
+        res = count(args[0])
+        print_count(res)
     except AssertionError as error:
         print(f'AssertionError: {error}')
 
