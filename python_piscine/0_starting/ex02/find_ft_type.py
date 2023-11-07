@@ -1,3 +1,5 @@
+#running your function alone does nothing.... should i check if object is empty?
+#str.capitalize
 def all_thing_is_obj(object: any) -> int:
     types = {list: "List"
             , tuple: "Tuple"
